@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: "Inter", sans-serif;
+  }
+
+  #timer {
+    font-size: 64px;
+    font-weight: 200;
+    color: #1a1a1a;
+    letter-spacing: 0.03em;
+    font-variant-numeric: tabular-nums;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+<div id="timer">00:00:00</div>
+<script>
+  const startTime = Date.now();
+  const el = document.getElementById("timer");
+
+  function pad(n) {
+    return String(n).padStart(2, "0");
+  }
+
+  function update() {
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    const h = Math.floor(elapsed / 3600);
+    const m = Math.floor((elapsed % 3600) / 60);
+    const s = elapsed % 60;
+    el.textContent = pad(h) + ":" + pad(m) + ":" + pad(s);
+  }
+
+  update();
+  setInterval(update, 500);
+</script>
+</body>
+</html>
